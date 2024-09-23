@@ -5,6 +5,7 @@ import Image from "next/image";
 import logoImg from "@/assets/logo.png";
 import classes from "./MainHeader.module.css";
 import MainHeaderBackground from "./MainHeaderBackground";
+import NavLink from "./NavLink";
 
 export default function MainHeader() {
   return (
@@ -18,10 +19,10 @@ export default function MainHeader() {
         <nav className={classes.nav}>
           <ul>
             <li>
-              <Link href="/meals">둘러보기</Link>
+              <NavLink href="/meals">둘러보기</NavLink>
             </li>
             <li>
-              <Link href="/community">모임</Link>
+              <NavLink href="/community">모임</NavLink>
             </li>
           </ul>
         </nav>
