@@ -2,11 +2,15 @@ import React from "react";
 import classes from "./page.module.css";
 import Link from "next/link";
 import MealsGrid from "@/components/Meals/MealsGrid";
+import { Suspense } from "react";
 import { getMeals } from "@/lib/meals";
 
-export default async function MealsPage() {
+async function Meals() {
   const meals = await getMeals();
+  return <MealsGrid meals={meals} />;
+}
 
+export default function MealsPage() {
   return (
     <>
       <header className={classes.header}>
@@ -16,11 +20,15 @@ export default async function MealsPage() {
         </h1>
         <p>마음에드는 레시피를 찾고 요리해보세요. 쉽고 즐겁습니다!</p>
         <p className={classes.cta}>
-          <Link href="/meals/share">Share Your Favorite Recipe</Link>
+          <Link href="/meals/share">당신의 조리법을 나눠봐요</Link>
         </p>
       </header>
       <main className={classes.main}>
-        <MealsGrid meals={meals} />
+        <Suspense
+          fallback={<p className={classes.loading}>Fetching meals...</p>}
+        >
+          <Meals />
+        </Suspense>
       </main>
     </>
   );
